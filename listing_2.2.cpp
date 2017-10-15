@@ -34,7 +34,9 @@ void f()
     }
     catch(...)
     {
-        t.join();
+        t.join();	//1.发生异常在join()函数之前，join()就不会被调用
+					//2.所以，在catch中再次加入join()函数
+					//3.从而避免生命周期的问题
         throw;
     }
     t.join();

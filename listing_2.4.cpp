@@ -45,7 +45,7 @@ void edit_document(std::string const& filename)
         if(cmd.type==open_new_document)
         {
             std::string const new_name=get_filename_from_user();
-            std::thread t(edit_document,new_name);
+            std::thread t(edit_document,new_name);  //传递函数名、函数参数
             t.detach();
         }
         else

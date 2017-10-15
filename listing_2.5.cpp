@@ -15,7 +15,7 @@ std::thread g()
 {
     void some_other_function(int);
     std::thread t(some_other_function,42);
-    return t;
+    return t;       // 返回std::thread对象t
 }
 
 int main()
