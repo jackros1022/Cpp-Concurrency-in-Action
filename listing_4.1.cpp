@@ -25,7 +25,7 @@ bool is_last_chunk(data_chunk&)
 }
 
 std::mutex mut;
-std::queue<data_chunk> data_queue;
+std::queue<data_chunk> data_queue; //用来在两个线程之间传递数据的队列
 std::condition_variable data_cond;
 
 void data_preparation_thread()
@@ -44,7 +44,7 @@ void data_processing_thread()
     while(true)
     {
         std::unique_lock<std::mutex> lk(mut);
-        data_cond.wait(lk,[]{return !data_queue.empty();});
+        data_cond.wait(lk,[]{return !data_queue.empty();}); //检查data_queue是否不为空
         data_chunk data=data_queue.front();
         data_queue.pop();
         lk.unlock();

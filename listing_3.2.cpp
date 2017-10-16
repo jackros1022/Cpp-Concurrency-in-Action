@@ -19,7 +19,7 @@ public:
     void process_data(Function func)
     {
         std::lock_guard<std::mutex> l(m);
-        func(data);
+        func(data);         //传递了保护数据的引用
     }
 };
 
@@ -34,8 +34,8 @@ data_wrapper x;
 
 void foo()
 {
-    x.process_data(malicious_function);
-    unprotected->do_something();
+    x.process_data(malicious_function);         //传递一个恶意函数
+    unprotected->do_something();                //在无保护的情况下访问保护数据
 }
 
 int main()
